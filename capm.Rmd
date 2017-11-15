@@ -17,7 +17,7 @@ $$R_f=0.002$$
 $$\beta_e=1.4$$
 $$R_m-R_f = 0.07$$
 
-Berekend (gegevens Google Finance): $T_c = 1-\frac{48,351}{64,089}=0.25$
+Berekend (gegevens [Google Finance](https://finance.google.com/finance?q=NASDAQ%3AAAPL&fstype=ii&ei=sYUMWrGxFIXsU5z0nMgD)): $T_c = 1-\frac{48,351}{64,089}=0.25$
 ```{r}
 
 R_d <- 0.02
