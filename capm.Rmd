@@ -1,5 +1,6 @@
 ---
 title: "CAPM and WACC"
+author: "Witek ten Hove"
 output: html_notebook
 ---
 
