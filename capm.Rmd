@@ -40,4 +40,6 @@ $R_e = `r R_e`$
 R_a <- R_e * E / V + R_d * (1 - T_c) * D / V
 ```
 
-$WACC = R_a = `r R_a`$ 
+$WACC = R_a = `r R_a`$
+
+Aangezien het gaat om een product dat onder de reguliere business van Apple valt, kan met de berekende WACC worden gerekend.
