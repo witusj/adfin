@@ -21,19 +21,28 @@ meanR_A <- 0.20
 sdR_A <- 0.05
 meanR_B <- 0.05
 sdR_B <- 0.03
-wA <- 0.5
-wB <- 1 - wA
 
 ## Create random samples
 A <- rnorm(n = N, mean = meanR_A, sd = sdR_A)
 B <- rnorm(n = N, mean = meanR_B, sd = sdR_B)
+```
+
+
+Nu bouwen we een portefeuille van de twee fondsen. Beide fondsen krijgen een gewicht van 50%.
+```{r}
+## Declare weights
+w_A <- 0.5
+w_B <- 1 - w_A
 
 ## Create portfolio
-AB <- wA * A + wB * B
+AB <- w_A * A + w_B * B
 
 ## Combine in data frame
 stockDF <- data.frame(t, A, B, AB)
+```
 
+We plotten de tijdsreeksen van fondsen A, B en de portefeuille AB in één grafiek met de gemiddelde waarden. In de titel vind je de volatiliteit van de verschillende investeringen. **Waar zou je in investeren (of juist niet)?**
+```{r}
 ## Plot data
 title <- paste("sd(A) = ", round(sd(A),4), ", sd(B) = ", round(sd(B),4), ", sd(AB) = ", round(sd(AB),4))
 p1 <- ggplot(stockDF) +
@@ -46,5 +55,16 @@ p1 <- ggplot(stockDF) +
   ggtitle(title)
 
 ggplotly(p1)
+```
+
+We kunnen de verwachte waarde van de standaarddeviatie uitrekenen met de parameters waar die we als uitgangspunt hebben genomen.
+
+$$\sigma_{AB}^2 = w_A^2*\sigma_A^2+w_B^2*\sigma_B^2+2*w_A*w_B*\rho_{AB}*\sigma_A*\sigma_B$$
+Aangezien één van de uitgangspunten was dat de variabelen onafhankelijk zijn, nemen we voor de correlatie ($\rho_{AB}$) de waarde 0 (nul).
+```{r}
+rho_AB <- 0
+Evar_AB <- w_A^2*sdR_A^2 + w_B^2*sdR_B^2  + 2 * w_A * w_B * rho_AB * sdR_A * sdR_B
+Esd_AB <- Evar_AB^0.5
+cat("Verwachte variantie portefeuille: ", Evar_AB, "\nVerwachte standaard afwijking portefeuille: ", Esd_AB, "\nWerkelijke standaard afwijking portefeuille: ", round(sd(AB),4))
 ```
 
