@@ -35,7 +35,6 @@ AB <- wA * A + wB * B
 stockDF <- data.frame(t, A, B, AB)
 
 ## Plot data
-
 title <- paste("sd(A) = ", round(sd(A),4), ", sd(B) = ", round(sd(B),4), ", sd(AB) = ", round(sd(AB),4))
 p1 <- ggplot(stockDF) +
   geom_line(aes(x = t, y = A), color = "LightCoral") +
