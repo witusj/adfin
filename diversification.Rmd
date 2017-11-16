@@ -1,0 +1,51 @@
+---
+title: "Variantie, correlatie en diversificatie"
+output: html_notebook
+---
+
+# Twee tijdsreeksen van koersveranderingen
+
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+options(scipen = 999)
+library(ggplot2)
+library(plotly)
+```
+
+We gaan uit van twee fondsen: A en B met onafhankelijke maandelijkse koersbewegingen (normaal verdeeld). 
+
+```{r}
+## Create parameters
+N <- 120
+t <- 1:N
+meanR_A <- 0.20
+sdR_A <- 0.05
+meanR_B <- 0.05
+sdR_B <- 0.03
+wA <- 0.5
+wB <- 1 - wA
+
+## Create random samples
+A <- rnorm(n = N, mean = meanR_A, sd = sdR_A)
+B <- rnorm(n = N, mean = meanR_B, sd = sdR_B)
+
+## Create portfolio
+AB <- wA * A + wB * B
+
+## Combine in data frame
+stockDF <- data.frame(t, A, B, AB)
+
+## Plot data
+
+title <- paste("sd(A) = ", round(sd(A),4), ", sd(B) = ", round(sd(B),4), ", sd(AB) = ", round(sd(AB),4))
+p1 <- ggplot(stockDF) +
+  geom_line(aes(x = t, y = A), color = "LightCoral") +
+  geom_hline(yintercept = mean(A), color = "IndianRed") +
+  geom_line(aes(x = t, y = B), color = "SlateBlue") +
+  geom_hline(yintercept = mean(B), color = "DarkSlateBlue") +
+  geom_line(aes(x = t, y = AB), color = "LightSeaGreen") +
+  geom_hline(yintercept = mean(AB), color = "DarkSeaGreen") +
+  ggtitle(title)
+
+ggplotly(p1)
+```
+
