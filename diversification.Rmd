@@ -47,7 +47,7 @@ We plotten de tijdsreeksen van fondsen A, B en de portefeuille AB in één grafi
 title <- paste("sd(A) = ", round(sd(A),4), ", sd(B) = ", round(sd(B),4), ", sd(AB) = ", round(sd(AB),4))
 p1 <- ggplot(stockDF) +
   geom_line(aes(x = t, y = A), color = "LightCoral") +
-  geom_hline(yintercept = mean(A), color = "IndianRed") +
+  geom_hline(yintercept = mean(A), color = "FireBrick") +
   geom_line(aes(x = t, y = B), color = "SlateBlue") +
   geom_hline(yintercept = mean(B), color = "DarkSlateBlue") +
   geom_line(aes(x = t, y = AB), color = "LightSeaGreen") +
