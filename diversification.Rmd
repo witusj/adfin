@@ -57,7 +57,7 @@ p1 <- ggplot(stockDF) +
 ggplotly(p1)
 ```
 
-We kunnen de verwachte waarde van de standaarddeviatie uitrekenen met de parameters waar die we als uitgangspunt hebben genomen.
+We kunnen de verwachte waarde van de variantie uitrekenen met de parameters waar die we als uitgangspunt hebben genomen.
 
 $$\sigma_{AB}^2 = w_A^2*\sigma_A^2+w_B^2*\sigma_B^2+2*w_A*w_B*\rho_{AB}*\sigma_A*\sigma_B$$
 Aangezien één van de uitgangspunten was dat de variabelen onafhankelijk zijn, nemen we voor de correlatie ($\rho_{AB}$) de waarde 0 (nul).
