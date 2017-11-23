@@ -1,0 +1,46 @@
+---
+title: "Debt policy"
+output: html_notebook
+---
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=TRUE}
+library(tidyverse)
+library(plotly)
+```
+
+
+$$WACC:$$
+<hr>
+$$R_A=R_E * \frac{E}{V}+R_D * \frac{D}{V}$$
+<hr>
+$$=> R_E * \frac{E}{V}=R_A-R_D * \frac{D}{V}$$
+<hr>
+$$=> R_E =\frac{V}{E}*(R_A-R_D * \frac{D}{V})$$
+<hr>
+$$=> R_E =R_A*\frac{V}{E}-R_D * \frac{D}{E}$$
+<hr>
+$$=> R_E =R_A*\frac{E+D}{E}-R_D * \frac{D}{E}$$
+<hr>
+$$=> R_E =R_A*\frac{E}{E}+R_A*\frac{D}{E}-R_D * \frac{D}{E}$$
+<hr>
+$$=> R_E =R_A+(R_A-R_D) * \frac{D}{E}$$
+
+```{r}
+D <- seq(from=0,to=90, by=1)
+E <- 100 - D
+n <- length(D)
+g <- 0.30
+R_A <- rep(0.16, n)
+R_D <- rep(0.04, n)
+s <- 75
+R_D[s:n] <- R_D[s:n]*(1+g)^((D[s:n]-D[s])/(0.58*E[s:n]))
+
+R_E <- R_A + (R_A - R_D) * D/E
+myDF <- data.frame(R_E, R_A, R_D, D, E, D/E)
+
+p <- ggplot(data = myDF) +
+  geom_line(aes(x = D/E, y = R_E), color = "green") +
+  geom_line(aes(x = D/E, y = R_A), color = "red") +
+  geom_line(aes(x = D/E, y = R_D), color = "blue")
+
+ggplotly(p, width = 800)
+```
