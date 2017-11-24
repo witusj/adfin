@@ -32,7 +32,7 @@ g <- 0.30
 R_A <- rep(0.16, n)
 R_D <- rep(0.04, n)
 s <- 75
-R_D[s:n] <- R_D[s:n]*(1+g)^((D[s:n]-D[s])/(0.58*E[s:n]))
+R_D[s:n] <- R_D[s:n]*(1+g)^((D[s:n]-D[s])/(0.58*E[s:n])) ## Laat R_D vanaf een bepaals moment toenemen
 
 R_E <- R_A + (R_A - R_D) * D/E
 myDF <- data.frame(R_E, R_A, R_D, D, E, D/E)
