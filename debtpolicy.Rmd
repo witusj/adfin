@@ -40,7 +40,8 @@ myDF <- data.frame(R_E, R_A, R_D, D, E, D/E)
 p <- ggplot(data = myDF) +
   geom_line(aes(x = D/E, y = R_E), color = "green") +
   geom_line(aes(x = D/E, y = R_A), color = "red") +
-  geom_line(aes(x = D/E, y = R_D), color = "blue")
+  geom_line(aes(x = D/E, y = R_D), color = "blue") +
+  ggtitle(label = "Miller & Modigliani - Proposition 2")
 
 ggplotly(p, width = 800)
 ```
